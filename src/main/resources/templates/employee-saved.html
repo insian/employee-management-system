@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="ISO-8859-1">
+		<title>Insert title here</title>
+	</head>
+	<body>
+		<p class="h4 mb-4">First Name:</p>
+		<p class="h4 mb-4" th:text="${employee.firstName}"></p><br>
+		<p class="h4 mb-4">Last Name:</p>
+		<p class="h4 mb-4" th:text="${employee.lastName}"></p><br>
+		<p class="h4 mb-4">Email:</p>
+		<p class="h4 mb-4" th:text="${employee.email}"></p><br>
+		<hr>
+		<a th:href="employees">Back to Employees</a>
+	</body>
+</html>

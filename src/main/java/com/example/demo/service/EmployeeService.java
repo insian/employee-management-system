@@ -5,8 +5,13 @@ import java.util.List;
 import com.example.demo.model.Employee;
 
 public interface EmployeeService {
-	Employee createEmployee(Employee employee);
-	List<Employee> getEmployees();
-	void save(Employee employee);
-	void deleteEmployee(Integer employeeId);
+
+	List<Employee> findAll();
+	
+	Employee findById(int theId);
+	
+	void save(Employee theEmployee);
+	
+	void deleteById(int theId);
+	
 }

@@ -1,55 +1,54 @@
 package com.example.demo.service;
 
 import java.util.List;
+import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.model.Employee;
 import com.example.demo.repo.EmployeeRepository;
 
-import lombok.AllArgsConstructor;
 
 @Service
-@AllArgsConstructor
 public class EmployeeServiceImpl implements EmployeeService{
+	private EmployeeRepository employeeRepository;
 	
-	private final EmployeeRepository employeeRepo;
-
+	@Autowired
+	public EmployeeServiceImpl(EmployeeRepository theEmployeeRepository) {
+		employeeRepository = theEmployeeRepository;
+	}
+	
 	@Override
-	public Employee createEmployee(Employee employee) {
-		// TODO Auto-generated method stub
-		return employeeRepo.save(employee);
+	public List<Employee> findAll() {
+		return employeeRepository.findAll();
 	}
 
 	@Override
-	public List<Employee> getEmployees() {
-		// TODO Auto-generated method stub
-		return employeeRepo.findAll();
-	}
-
-	/*@Override
-	public Employee findEmployeeById(Integer employeeId) {
-		// TODO Auto-generated method stub
-		//return employeeRepo.findById(employeeId).get();
-		return employeeRepo.getReferenceById(employeeId);
-	}*/
-
-	/*@Override
-	public Employee updateEmployee(Employee employee) {
-		// TODO Auto-generated method stub
-		return employeeRepo.save(employee);
-	}*/
-
-	@Override
-	public void deleteEmployee(Integer employeeId) {
-		// TODO Auto-generated method stub
-		employeeRepo.deleteById(employeeId);
+	public Employee findById(int theId) {
+		Optional<Employee> result = employeeRepository.findById(theId);
+		
+		Employee theEmployee = null;
+		
+		if (result.isPresent()) {
+			theEmployee = result.get();
+		}
+		else {
+			// we didn't find the employee
+			throw new RuntimeException("Did not find employee id - " + theId);
+		}
+		
+		return theEmployee;
 	}
 
 	@Override
-	public void save(Employee employee) {
-		// TODO Auto-generated method stub
-		employeeRepo.save(employee);
+	public void save(Employee theEmployee) {
+		employeeRepository.save(theEmployee);
+	}
+
+	@Override
+	public void deleteById(int theId) {
+		employeeRepository.deleteById(theId);
 	}
 
 }

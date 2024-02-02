@@ -19,7 +19,7 @@ public class Employee {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "employee_id")
-	private Integer id;
+	private int id;
 	@Column(name = "first_name")
 	private String firstName;
 	@Column(name = "last_name")
@@ -27,5 +27,9 @@ public class Employee {
 	@Column(name = "email_id",unique = true)
 	private String email;
 	
-	
+	public Employee(String firstName, String lastName, String email) {
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = email;
+	}
 }
